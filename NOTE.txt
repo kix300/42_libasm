@@ -5,3 +5,12 @@ Dans un fichier assembleur il y a 4 partie meme si elle ne sont pas definie.
 - .rodata -> global un-initialized constants
 - .bss -> global un-initialized variables
 - .text -> our code
+
+
+
+Aspect              32-bit (ancien)     64-bit (moderne)
+Instruction syscall	int 0x80            syscall
+Registres arguments	ebx, ecx, edx       rdi, rsi, rdx
+Numéro write        4                   1
+Numéro exit	        1	                60
+Point d'entrée	    start ou _start	    _start
