@@ -1,0 +1,7 @@
+compilateur : nasm
+
+Dans un fichier assembleur il y a 4 partie meme si elle ne sont pas definie.
+- .data -> global initialized variables
+- .rodata -> global un-initialized constants
+- .bss -> global un-initialized variables
+- .text -> our code
