@@ -1,19 +1,26 @@
 ; on definie start comme variable global a tous le systeme
 ; hello world test
 section .data
-msg: DB 'Hello World!', 10
-msgSize EQU $ - msg
+msg: DB 'Hello World!', 10, 0 ; le 0 cest pour dire on le termine
+result_msg: DB 'Length: ', 0 
 
+section .bss
+digit_buff: resb 20
 global _start
+extern ft_strlen
 
 section .text
 
 _start:
+    ; appel ft_strlen on return rax donc ici rax vaut la taille de helloworld
+    mov rdi, msg        ; on met msg dans rdi car rdi est le parametre passer dans ft_strlen
+    call ft_strlen
+
     ; write(1, msg,msgSize)
-    mov rax, 1          ; syscall number: sys_write (1 en 64-bit)
     mov rdi, 1          ; arg1: fd = stdout
     mov rsi, msg        ; arg2: buffer
-    mov rdx, msgSize    ; arg3: count
+    mov rdx, rax        ; arg3: count
+    mov rax, 1
     syscall
     
     ; exit(0)

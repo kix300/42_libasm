@@ -6,7 +6,7 @@ Dans un fichier assembleur il y a 4 partie meme si elle ne sont pas definie.
 - .bss -> global un-initialized variables
 - .text -> our code
 
-
+DB = define byte
 
 Aspect              32-bit (ancien)     64-bit (moderne)
 Instruction syscall	int 0x80            syscall
@@ -14,3 +14,24 @@ Registres arguments	ebx, ecx, edx       rdi, rsi, rdx
 Numéro write        4                   1
 Numéro exit	        1	                60
 Point d'entrée	    start ou _start	    _start
+
+nasm -f elf64 helloWorld.asm && ld -o helloWorld helloWorld.o
+
+il u a 6 registre qui passent les premier arguments au fonctions
+RDI, RSI, RDX, RCX, R8, R9
+
+RDI = PRemier parametre (destination)
+RSI = Deuxieme parametre (source)
+RAX = Return value + compteur
+RBP = base pointeur
+RSP = stack pointeur 
+
+
+Registre	Rôle
+RAX	Numéro du syscall (1=write, 60=exit, etc.)
+RDI	1er argument
+RSI	2ème argument
+RDX	3ème argument
+R10	4ème argument
+R8	5ème argument
+R9	6ème argument
