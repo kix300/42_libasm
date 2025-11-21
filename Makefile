@@ -6,21 +6,22 @@ OBJ_DIR = obj
 BIN_DIR = bin
 
 ASM = nasm
-ASMFLAGS = -f elf64
+ASMFLAGS = -f elf64 -DPIC
 
 AR = ar
 ARFLAGS = rcs
 
-LD = ld
+CC = gcc
+CFLAGS = -Wall -Werror -Wextra
 
 SRCS_DIR = srcs
 
-SRCS = ft_strlen.s
+SRCS = ft_strlen.s ft_strcpy.s ft_write.s ft_read.s
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.s=.o))
 
-MAIN_SRC = main.s
-MAIN_OBJ = $(OBJ_DIR)/$(MAIN_SRC:.s=.o)
+MAIN_SRC = main.c
+MAIN_OBJ = $(OBJ_DIR)/$(MAIN_SRC:.c=.o)
 
 GREEN = \033[0;32m
 BLUE = \033[0;34m
@@ -38,16 +39,19 @@ $(OBJ_DIR)/%.o: $(SRCS_DIR)/%.s | $(OBJ_DIR)
 	@echo "$(BLUE)Assembling $<...$(RESET)"
 	$(ASM) $(ASMFLAGS) $< -o $@
 
-$(OBJ_DIR)/%.o: %.s | $(OBJ_DIR)
-	@echo "$(BLUE)Assembling $<...$(RESET)"
-	$(ASM) $(ASMFLAGS) $< -o $@
+# $(OBJ_DIR)/%.o: %.s | $(OBJ_DIR)
+# 	@echo "$(BLUE)Assembling $<...$(RESET)"
+# 	$(ASM) $(ASMFLAGS) $< -o $@
+	
+$(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
+	@echo "$(BLUE)Compiling $<...$(RESET)"
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(BIN_DIR)/$(TEST): $(BIN_DIR)/$(NAME) $(MAIN_OBJ) | $(BIN_DIR)
 	@echo "$(BLUE)Linking $(TEST)...$(RESET)"
-	$(LD) $(MAIN_OBJ) -L$(BIN_DIR) -lasm -o $(BIN_DIR)/$(TEST)
+	$(CC) $(MAIN_OBJ) -L$(BIN_DIR) -lasm -o $(BIN_DIR)/$(TEST)
 	@echo "$(GREEN)✓ $(TEST) created successfully!$(RESET)"
 
-# Créer les dossiers nécessaires
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
