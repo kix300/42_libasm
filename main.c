@@ -5,7 +5,6 @@
 // src: DB 'Source!', 0
 // dest: times 20 DB 0
 
-
 // section .text
 // global _start
 // extern ft_strlen
@@ -27,14 +26,13 @@
 //     syscall
 //     ; regarder le retour de syscall
 
-
 //     ; appel ft_strlen
 //     mov rdi, dest
 //     mov rsi, src
 //     call ft_strcpy ; rax a mtn copier src
 //     push rax ; on save dest sur la pile
 
-//     mov rdi, rax 
+//     mov rdi, rax
 //     call ft_strlen
 //     mov rdx, rax
 //     pop rsi
@@ -42,16 +40,15 @@
 //     mov rax, 1
 //     syscall
 //     ; regarder le retour de syscall
-    
+
 //     ; exit(0)
 //     mov rax, 60         ; syscall number: sys_exit (60 en 64-bit)
 //     mov rdi, 0          ; arg1: status = 0
-//     syscall             ; int 0x80 -> 32 bit | syscall -> 64 bit 
+//     syscall             ; int 0x80 -> 32 bit | syscall -> 64 bit
 //     ; regarder le retour de syscall
-    
-//     ; PAS de ret ici ! Le programme se termine avec exit
-//     ; ret ; ret = return mais quand on exit et que ret est appele alors il return a un endroit quil  ne conais pas 
 
+//     ; PAS de ret ici ! Le programme se termine avec exit
+//     ; ret ; ret = return mais quand on exit et que ret est appele alors il return a un endroit quil  ne conais pas
 
 #include "libasm.h"
 int main(void)
@@ -69,18 +66,20 @@ int main(void)
     ft_strcpy(dest, "Bonjour!");
     printf("ft_strcpy result: \"%s\"\n\n", dest);
 
-    // // ===== Test ft_strcmp =====
-    // printf("=== ft_strcmp ===\n");
-    // int cmp = ft_strcmp("abc", "abc");
-    // printf("ft_strcmp(\"abc\", \"abc\") = %d\n", cmp);
-    // cmp = ft_strcmp("abc", "def");
-    // printf("ft_strcmp(\"abc\", \"def\") = %d\n\n", cmp);
+    // a faire strcmp + strdup
+    // ===== Test ft_strcmp =====
+    printf("=== ft_strcmp ===\n");
+    printf("strcmp(\"abc\", \"abc\") = %d\n", strcmp("abc", "abc"));
+    printf("ft_strcmp(\"abc\", \"abc\") = %d\n", ft_strcmp("abc", "abc"));
+
+    printf("strcmp(\"abc\", \"def\") = %d\n", strcmp("abc", "def"));
+    printf("ft_strcmp(\"abc\", \"def\") = %d\n", ft_strcmp("abc", "def"));
 
     // ===== Test ft_write =====
     printf("=== ft_write ===\n");
     ssize_t ret = ft_write(1, "Test ft_write\n", 14);
     printf("ft_write returned: %zd\n", ret);
-    
+
     // Test avec erreur (fd invalide)
     errno = 0;
     ret = ft_write(999, "test", 4);

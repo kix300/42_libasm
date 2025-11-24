@@ -43,6 +43,19 @@ RCX (64 bits = 8 bytes)
 │    └──────────────────────────────┘ │
 └───────────────────────────────────────┘
 
+RBX (64 bits)
+├── EBX (32 bits)
+│   ├── BX (16 bits)
+│   │   ├── BH (8 bits high)
+│   │   └── BL (8 bits low)  ← ICI, 1 byte de RBX
+
+RAX (64 bits - 8 octets)
+├── EAX (32 bits - 4 octets) ───┐
+│   ├── AX (16 bits - 2 octets) │
+│   │   ├── AH (8 bits high)    │
+│   │   └── AL (8 bits low)     │
+└───────────────────────────────┘
+
 Exemple avec RCX = 0x0123456789ABCDEF :
 ┌────────────────────────────────────┐
 │  RCX = 0x0123456789ABCDEF         │  (64 bits)
@@ -57,3 +70,7 @@ par default le compilateur compile en PIE c' est a dire en Position Independent 
 l'address change a chaque execution
 Du coup pour call une extern comme __errno_location on doit utiliser plt qui resout l'adress dynamiquement
 wrt c'est with respect to 
+
+
+jz = jump if zero
+movzx =  move with zero extend 

@@ -16,7 +16,7 @@ CFLAGS = -Wall -Werror -Wextra
 
 SRCS_DIR = srcs
 
-SRCS = ft_strlen.s ft_strcpy.s ft_write.s ft_read.s
+SRCS = ft_strlen.s ft_strcpy.s ft_write.s ft_read.s ft_strcmp.s
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.s=.o))
 
