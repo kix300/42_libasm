@@ -1,6 +1,6 @@
 ; fonction ft_strdup
-; Duplique une string en allouant de la mémoire
-; Entrée : RDI = pointeur vers la string source
+; Duplique une string en allouant de la memoire
+; Entree : RDI = pointeur vers la string source
 ; Sortie : RAX = pointeur vers la nouvelle string (ou NULL si erreur)
 
 global ft_strdup
@@ -12,10 +12,10 @@ extern __errno_location
 ft_strdup:
     push rbp
     mov rbp, rsp
-    push rbx                    ; Sauvegarde RBX (callee-saved)
+    push rbx                    
     push r12                    ; Sauvegarde R12 pour stocker src
     
-    mov r12, rdi                ; R12 = src (on sauvegarde car malloc va écraser RDI)
+    mov r12, rdi                ; R12 = src (on sauvegarde car malloc va ecraser RDI)
     
     call ft_strlen              ; RAX = strlen(src)
     inc rax                     ; RAX = strlen(src) + 1 (pour le '\0')
@@ -23,9 +23,9 @@ ft_strdup:
     mov rdi, rax                ; RDI = taille à allouer
     push rdi                    ; Sauvegarde la taille
     call malloc wrt ..plt       ; RAX = malloc(size)
-    pop rdi                     ; Restore (pas utilisé mais bon)
+    pop rdi                     ; Restore 
     
-    test rax, rax               ; Vérifie si RAX == NULL
+    test rax, rax               ; test si RAX == NULL
     jz .error                   ; Si NULL, on retourne NULL
     
     mov rdi, rax                ; RDI = dest (nouvelle string)
@@ -40,7 +40,6 @@ ft_strdup:
     ret
 
 .error:
-    ; malloc a échoué, errno est déjà set par malloc
     xor rax, rax                ; RAX = NULL
     pop r12
     pop rbx

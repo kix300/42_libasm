@@ -1,4 +1,6 @@
-; ssize_t ft_read(int fd, void *buf, size_t count);
+; fonction ft_read
+; read n byte of buff
+; Entrer Rdi=fd, RSI= buff et RDX count
 
 global ft_read
 extern __errno_location
@@ -8,7 +10,6 @@ ft_read:
     mov rbp, rsp
     
     mov rax, 0          ; sys_read
-    ; RDI = fd, RSI = buf, RDX = count (déjà définis)
     syscall
     
     cmp rax, 0

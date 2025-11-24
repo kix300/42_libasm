@@ -66,7 +66,6 @@ int main(void)
     ft_strcpy(dest, "Bonjour!");
     printf("ft_strcpy result: \"%s\"\n\n", dest);
 
-    // a faire strcmp + strdup
     // ===== Test ft_strcmp =====
     printf("=== ft_strcmp ===\n");
     printf("strcmp(\"abc\", \"abc\") = %d\n", strcmp("abc", "abc"));
