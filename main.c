@@ -75,6 +75,13 @@ int main(void)
     printf("strcmp(\"abc\", \"def\") = %d\n", strcmp("abc", "def"));
     printf("ft_strcmp(\"abc\", \"def\") = %d\n", ft_strcmp("abc", "def"));
 
+    // ===== Test ft_strdup =====
+    printf("=== ft_strdup ===\n");
+    char *dup = ft_strdup("Hello!");
+    printf("ft_strdup(\"Hello!\") = \"%s\"\n", dup);
+    printf("Address: %p\n", (void *)dup);
+    free(dup);
+
     // ===== Test ft_write =====
     printf("=== ft_write ===\n");
     ssize_t ret = ft_write(1, "Test ft_write\n", 14);
